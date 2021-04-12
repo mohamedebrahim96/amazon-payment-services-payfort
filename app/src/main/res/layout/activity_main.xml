@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:layoutDirection="ltr"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@android:color/holo_green_light"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="-5dp"
+            android:textSize="10sp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/Simulator_hint"
+            android:textColor="@android:color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/callSdkBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:text="@string/submit_btn_hint"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@null"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:background="#666666">
+
+        <TextView
+            style="@style/simulatorKeys"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="2.8"
+            android:text="@string/submit_to_key"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            style="@style/simulatorDots"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4.5"
+            android:text=":"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/environmentNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="#999999">
+
+        <TextView
+            style="@style/simulatorKeys"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:layout_weight="2.8"
+            android:text="@string/command_key"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/simulatorDots"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4.5"
+            android:text=":"
+            android:textColor="@android:color/black"/>
+
+        <Spinner
+            android:id="@+id/commandsSpinner"
+            style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="2"
+            android:entries="@array/command_value"
+            android:textSize="13sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <CheckBox
+                android:id="@+id/customUI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Custom UI"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:checked="false" />
+
+
+            <CheckBox
+                android:id="@+id/doViewResponsePage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="view response page"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:checked="false" />
+
+
+            <CheckBox
+                android:id="@+id/doAddDeviceFingerprint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="add device_fingerprint"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="0dp"
+                android:checked="false" />
+
+            <CheckBox
+                android:id="@+id/showFraudExtrasCB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="show Fraud Extras parameters"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="0dp"
+                android:checked="false" />
+
+            <CheckBox
+                android:id="@+id/showLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="show loading"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="0dp"
+                android:checked="true" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/simulatorKeys"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2.8"
+                    android:text="@string/sdk_token_key"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    style="@style/simulatorDots"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4.5"
+                    android:text=":" />
+
+                <EditText
+                    android:id="@+id/sdkTokenET"
+                    style="@style/simulatorET"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/language_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <Spinner
+                android:id="@+id/languagesSpinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/language_value"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/payment_option_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <Spinner
+                android:id="@+id/paymentOpSpinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/payment_option_value"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/installmentsLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/installments_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <Spinner
+                android:id="@+id/installmentsSpinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/installments_value"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/otherParamsLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

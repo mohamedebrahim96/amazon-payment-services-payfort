@@ -1,0 +1,36 @@
+<resources>
+    <declare-styleable name="FortView">
+
+        <attr name="hintTextColor" format="reference|color" />
+        <attr name="hintText" format="string" />
+
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="reference|color" />
+
+        <attr format="color" name="boxBackgroundColor"/>
+        <!-- Whether the text input area should be drawn as a filled box, an outline box, or not as a box.-->
+        <attr name="boxBackgroundShape">
+            <!-- Specifies that there should be no box set on the text input area. -->
+            <enum name="none" value="0"/>
+            <!-- Filled box mode for the text input box. -->
+            <enum name="filled" value="1"/>
+            <!-- Outline box mode for the text input box. -->
+            <enum name="outline" value="2"/>
+        </attr>
+
+
+        <!-- TextAppearance of any error message displayed. -->
+        <attr format="reference" name="errorTextAppearance"/>
+        <!-- Text color for any error message displayed.
+             If set, this takes precedence over errorTextAppearance. -->
+        <attr format="color" name="errorTextColor"/>
+
+        <!-- The color to use for the box's stroke in outline box mode when an error
+         is being displayed. If not set, it defaults to errorTextColor if on
+         error state, or to counterOverflowTextColor if on overflow state. -->
+        <attr format="color" name="boxStrokeErrorColor"/>
+
+
+
+    </declare-styleable>
+</resources>

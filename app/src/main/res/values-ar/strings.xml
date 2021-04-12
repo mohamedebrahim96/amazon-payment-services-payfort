@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FortApiSimulator</string>
+    <string name="action_settings">Settings</string>
+    <string name="Simulator_hint">Simulator</string>
+
+    <string name="submit_to_key">Submit to</string>
+    <string name="merchant_identifier_key">merchant_identifier</string>
+    <string name="sdk_token_key">sdk_token</string>
+    <string name="access_code_key">access_code</string>
+    <string name="Signature_passphrase_key">phass-phrase</string>
+    <string name="sha_type_key">SHA-type</string>
+    <string name="language_key">language</string>
+    <string name="command_key">command</string>
+    <string name="installments_key">installments</string>
+    <string name="payment_option_key">payment_option</string>
+    <string name="eci_key">eci</string>
+    <string name="submit_as_key">Submit to</string>
+
+
+    <string-array name="submit_to_value">
+        <item>http://bkend1.pfdev.com:8080/FortMobileAPI/whatever</item>
+        <item>https://checkout.fortstg.com/FortMobileAPI/whatever</item>
+        <item>https://sbcheckout.payfort.com/FortMobileAPI/whatever</item>
+    </string-array>
+    <string name="merchant_identifier_value">mid1</string>
+    <string name="access_code_value">accessCode1</string>
+    <string name="Signature_passphrase_value">omMas300dREQ</string>
+    <string-array name="sha_type_value">
+        <item>SHA-128</item>
+        <item>SHA-256</item>
+        <item>SHA-512</item>
+    </string-array>
+    <string-array name="language_value">
+        <item>en</item>
+        <item>ar</item>
+    </string-array>
+    <string-array name="command_value">
+        <item>AUTHORIZATION</item>
+        <item>PURCHASE</item>
+    </string-array>
+    <string-array name="payment_option_value">
+        <item></item>
+        <item>VISA</item>
+        <item>MASTERCARD</item>
+        <item>AMEX</item>
+        <item>MADA</item>
+        <item>SADAD</item>
+    </string-array>
+    <string-array name="installments_value">
+        <item></item>
+        <item>NO</item>
+    </string-array>
+    <string name="submit_as_value">MOBILE API</string>
+
+    <string name="submit_btn_hint">submit AR</string>
+
+
+</resources>

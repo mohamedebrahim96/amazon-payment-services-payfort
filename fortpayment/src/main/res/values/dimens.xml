@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- ********** Font Sizes ********** -->
+    <dimen name="pf_100_txt_size">100sp</dimen>
+    <dimen name="pf_50_txt_size">50sp</dimen>
+    <dimen name="pf_25_txt_size">25sp</dimen>
+    <dimen name="pf_20_txt_size">20sp</dimen>
+    <dimen name="pf_15_txt_size">15sp</dimen>
+    <dimen name="pf_13_txt_size">13sp</dimen>
+    <dimen name="pf_12_txt_size">12sp</dimen>
+    <dimen name="pf_10_txt_size">10sp</dimen>
+
+    <!-- ********** Init Connection Activity ********** -->
+    <!-- Activity -->
+    <dimen name="pf_init_act_width">210dp</dimen>
+    <dimen name="pf_init_act_height">105dp</dimen>
+    <!-- Loading wheel -->
+    <dimen name="pf_init_loading_dim">50dp</dimen>
+    <dimen name="pf_init_loading_loading_width">3dp</dimen>
+    <!-- PF Logo -->
+    <dimen name="pf_init_logo_width">100dp</dimen>
+    <dimen name="pf_init_logo_margin">5dp</dimen>
+    <!-- Init hint -->
+    <dimen name="pf_init_hint_margin_left">4dp</dimen>
+    <dimen name="pf_init_hint_margin_top">-15dp</dimen>
+
+    <!-- ********** Credit Card Payment Activity ********** -->
+    <!-- ICONS -->
+    <dimen name="pf_icon_glow_radius">6dp</dimen>
+    <dimen name="pf_back_icon_txt_size">20sp</dimen>
+    <dimen name="pf_card_type_icon_txt_size">25sp</dimen>
+    <!-- Views Height -->
+    <dimen name="pf_tittle_header_height">45dp</dimen>
+    <dimen name="pf_amount_header_height">50dp</dimen>
+    <dimen name="pf_payment_type_header_height">45dp</dimen>
+    <dimen name="pf_pay_btn_height">60dp</dimen>
+    <dimen name="pf_ET_height">50dp</dimen>
+    <dimen name="pf_remember_me_tb_height">30dp</dimen>
+    <dimen name="pf_remember_me_tb_width">50dp</dimen>
+    <!-- Views Margins/Padding -->
+    <dimen name="pf_border_space">10dp</dimen>
+    <dimen name="pf_elements_top_space">15dp</dimen>
+    <dimen name="pf_5dp_space">5dp</dimen>
+    <dimen name="pf_10dp_space">10dp</dimen>
+    <dimen name="pf_25dp_space">25dp</dimen>
+
+    <!-- Card Type Icon -->
+    <dimen name="pf_card_type_width">60dp</dimen>
+    <dimen name="pf_card_type_height">30dp</dimen>
+    <dimen name="pf_card_type_margin_to_align">-14dp</dimen>
+    <dimen name="pf_card_type_margin_to_align_ar">14dp</dimen>
+
+</resources>

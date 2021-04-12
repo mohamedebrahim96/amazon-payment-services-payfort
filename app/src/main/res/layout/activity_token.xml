@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:layoutDirection="ltr">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@android:color/holo_green_light"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="-5dp"
+            android:textSize="10sp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/Simulator_hint"
+            android:textColor="@android:color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/loadingPB"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                />
+
+            <TextView
+                android:id="@+id/nextTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:onClick="getToken"
+                android:text="@string/next_btn"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/environment_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <Spinner
+                android:id="@+id/environmentSpinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/environment_value"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/service_command_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/language_value"
+                android:textSize="13sp"
+                android:text="@string/service_command_value"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/device_id_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <TextView
+                android:id="@+id/deviceIdValueTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/language_value"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/language_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <Spinner
+                android:id="@+id/languagesSpinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/language_value"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/sha_type_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <Spinner
+                android:id="@+id/shaSpinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/sha_type_value"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/simulatorKeys"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="2.8"
+                android:text="@string/Signature_passphrase_key"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/simulatorDots"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4.5"
+                android:text=":" />
+
+            <EditText
+                android:id="@+id/passphraseET"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:entries="@array/sha_type_value"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/otherParamsLL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

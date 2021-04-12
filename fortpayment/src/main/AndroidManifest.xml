@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.payfort.fortpaymentsdk">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+    >
+        <activity android:name=".presentation.response.CreditCardResponseActivity"
+            android:configChanges="locale|orientation|screenSize"
+            android:theme="@style/AppFortTheme"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.credit.CreditCardPaymentActivity"
+            android:configChanges="locale|orientation|screenSize"
+            android:theme="@style/AppFortTheme"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.init.InitSecureConnectionActivity"
+            android:configChanges="locale|orientation|screenSize"
+            android:theme="@style/Theme.Transparent"
+            />
+
+
+        <activity android:name=".presentation.threeds.ThreeDsActivity"
+            android:configChanges="locale|orientation|screenSize"
+            android:theme="@style/Theme.TransparentThreeDs"
+         />
+    </application>
+
+</manifest>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pf_init_conn_hint">بدء اتصال آمن</string>
+    <string name="pf_cc_title_hint">بيانات الدفع</string>
+    <string name="pf_cardholder_name_hint">اسم حامل البطاقة</string>
+    <string name="pf_card_number_hint">رقم البطاقة</string>
+    <string name="pf_expiry_date_hint">تاريخ انتهاء الصلاحية (MM/YY)</string>
+    <string name="pf_cvv_hint">قيمة التحقق من البطاقة</string>
+    <string name="pf_pay_btn_hint">إدفع</string>
+    <string name="pf_expiry_date_value">MM/YY</string>
+    <string name="pf_remember_me">تذكرني</string>
+    <string name="pf_wifi_settings">الإعدادات</string>
+
+    <!-- Cancel payment Dialog -->
+    <string name="pf_cancel_payment_msg">إلغاء هذه الدفعة؟</string>
+    <string name="pf_cancel_payment_btn_yes">نعم</string>
+    <string name="pf_cancel_payment_btn_no">لا</string>
+
+    <!-- Errors -->
+    <string name="pf_errors_card_number_invalid">رقم البطاقة<em>غير صحيح.</em></string>
+    <string name="pf_errors_card_number_length"> يجب أن يتكون رقم البطاقة من<em>16 رقم.</em></string>
+    <string name="pf_errors_card_number_mismatch_po">نوع البطاقة الائتمانية الذي قمت بإدخاله لا يطابق خيار الدفع الذي اخترته.</string>
+    <string name="pf_cancel_required_field">هذا الحقل مطلوب ولا يمكن تركه فارغاً</string>
+    <string name="pf_cancel_exp_date_in_past"> التاريخ الذي قمت بإدخاله <em>في الماضي!</em></string>
+    <string name="pf_cancel_exp_date_invalid"> التاريخ الذي قمت بإدخاله <em>غير صحيح!</em></string>
+    <string name="pf_cancel_cvv_length">يجب أن تتكون قيمة التحقق من البطاقة من 3 أرقام.</string>
+
+    <string name="pf_no_connection">يرجى التأكد من أنك متصل بالإنترنت</string>
+    <string name="pf_technical_problem">مشكلة تقنية</string>
+    <string name="pf_no_back_tnx_processing">يرجى الإنتظار، الحركة قيد المعالجة</string>
+    <string name="pf_canceled_by_user">تم الغاء العملية من المشتري</string>
+    <string name="pf_errors_card_number_amex_length"> يجب أن يتكون رقم البطاقة من<em>15 رقم.</em></string>
+    <string name="pf_cancel_cvv_amex_length">يجب أن تتكون قيمة التحقق من البطاقة من 4 أرقام.</string>
+    <!-- Errors -->
+    <string name="pf_resp_page_great">حركة ناجحة</string>
+    <string name="pf_resp_page_failed">عملية غير ناجحة</string>
+
+    <string name="pf_technical_problem_missing_token_name_or_card_security">اسم ال (Token) أو رمز أمان البطاقة مفقود</string>
+    <string name="pf_no_token_name">لا توجد بطاقة مخزنة لإسم ال (Token)</string>
+
+</resources>
