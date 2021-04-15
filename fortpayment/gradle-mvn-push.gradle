@@ -58,4 +58,18 @@ tasks.all { task ->
 }
 
 
+// Configure the destination repository with
+// S3 URL and access credentials
+publishing {
+    repositories {
+        maven {
+            url 's3://marabiat-sdk-maven-test.s3-eu-west-1.amazonaws.com'
+            authentication {
+                awsIm(AwsImAuthentication)
+            }
+        }
+    }
+}
+
+
 
