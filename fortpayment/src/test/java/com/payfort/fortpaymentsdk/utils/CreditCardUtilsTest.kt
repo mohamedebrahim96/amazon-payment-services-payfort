@@ -21,10 +21,10 @@ class CreditCardUtilsTest {
 
 
     @Test
-    fun invalidCardNumber_thenReturnError_INVALID_CARD_LENGTH() {
+    fun invalidCardNumber_thenReturnError__INVALID_CARD_NUMBER() {
         val validator = CreditCardUtils.isValidCardNumber("411",null,null)
         print(validator.toString())
-        assert(validator == FortError.INVALID_CARD_LENGTH)
+        assert(validator == FortError.INVALID_CARD_NUMBER)
     }
 
     @Test

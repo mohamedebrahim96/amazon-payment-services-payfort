@@ -18,6 +18,10 @@ class FortDataSourceImplMock(val endpoint: FortEndpoint) : FortDataSource {
         return endpoint.processData("").map { sdkResponse() }
     }
 
+    override fun logData(body: SdkRequest): Observable<SdkResponse> {
+        return endpoint.logData("").map { sdkResponse() }
+    }
+
     private fun sdkResponse(): SdkResponse {
         val sdkResponse = SdkResponse()
         sdkResponse.isSuccess = true

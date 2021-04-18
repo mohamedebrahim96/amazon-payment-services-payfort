@@ -46,7 +46,7 @@ internal object ValidationUtils {
 
     fun isWholePositiveNumber(value: String?): Boolean {
 
-        return value != null && value.isDigitsOnly()
+        return value != null && value.isDigitsOnlyKotlin()
     }
 
    internal fun String.isDigitsOnlyKotlin() = all(Char::isDigit) && isNotEmpty()
