@@ -40,16 +40,7 @@ android {
         viewBinding true
     }
 
-    android.libraryVariants.all { variant ->
-        variant.outputs.all { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.aar')) {
-                def fileName = "FORTSDKv${android.defaultConfig.versionName}.aar"
-                //output.outputFileName = new File(outputFile.parent, fileName)
-                outputFileName = fileName
-            }
-        }
-    }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
