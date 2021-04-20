@@ -63,7 +63,7 @@ tasks.all { task ->
 publishing {
     repositories {
         maven {
-            url 's3://marabiat-sdk-maven-test.s3-eu-west-1.amazonaws.com'
+            url 's3://android-mobile-sdk-mvn.s3-us-east-1.amazonaws.com'
             authentication {
                 awsIm(AwsImAuthentication)
             }
