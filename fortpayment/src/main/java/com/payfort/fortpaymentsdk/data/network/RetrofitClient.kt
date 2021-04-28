@@ -24,16 +24,10 @@ object RetrofitClient {
      * @return FortEndpoint
      */
     fun getInstance(baseUrl: String): FortEndpoint {
-
-            val logging = HttpLoggingInterceptor()
-            if (BuildConfig.DEBUG)
-                logging.level = HttpLoggingInterceptor.Level.BODY
-
             val httpClient = OkHttpClient.Builder()
                 .writeTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .readTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .addInterceptor(logging)
                 .build()
 
 

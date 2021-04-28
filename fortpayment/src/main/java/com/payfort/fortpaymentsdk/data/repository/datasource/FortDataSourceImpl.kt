@@ -1,6 +1,5 @@
 package com.payfort.fortpaymentsdk.data.repository.datasource
 
-import android.util.Log
 import com.google.gson.Gson
 import com.payfort.fortpaymentsdk.domain.model.SdkRequest
 import com.payfort.fortpaymentsdk.domain.model.SdkResponse
@@ -8,7 +7,6 @@ import com.payfort.fortpaymentsdk.security.DataSecurityService
 import com.payfort.fortpaymentsdk.security.aes.AESCipherManager
 import com.payfort.fortpaymentsdk.utils.MapUtils
 import io.reactivex.Observable
-import io.reactivex.Single
 import java.security.interfaces.RSAPublicKey
 import javax.crypto.spec.SecretKeySpec
 

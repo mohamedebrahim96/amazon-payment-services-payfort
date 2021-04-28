@@ -40,7 +40,7 @@ android {
         viewBinding true
     }
 
-
+ 
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -84,23 +84,20 @@ dependencies {
 
     //Security
     implementation 'org.bouncycastle:bcprov-jdk16:1.46'
-    implementation 'com.google.guava:guava:24.1-jre'
+    implementation 'com.google.guava:guava:27.0.1-android'
 
 
     //UI
-    api 'com.intuit.sdp:sdp-android:1.0.6'
-    api 'com.intuit.ssp:ssp-android:1.0.6'
+     api 'com.intuit.sdp:sdp-android:1.0.6'
+     api 'com.intuit.ssp:ssp-android:1.0.6'
+
+
 
     def work_version = "2.5.0"
     // Kotlin + coroutines
-    implementation("androidx.work:work-runtime-ktx:$work_version") {
-        exclude group: 'com.google.guava', module: 'listenablefuture'
-    }
+    implementation("androidx.work:work-runtime-ktx:$work_version")
     // optional - RxJava2 support
-    implementation("androidx.work:work-rxjava2:$work_version") {
-        exclude group: 'com.google.guava', module: 'listenablefuture'
-    }
-
+    implementation("androidx.work:work-rxjava2:$work_version")
 
     //test
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
