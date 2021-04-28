@@ -2,7 +2,7 @@ import org.gradle.internal.credentials.DefaultAwsCredentials
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 ext{
-    VERSION = "2.0"
+    VERSION = "2.0.1"
     if(project.hasProperty("maven_version")){
         VERSION = project.property("maven_version")
     }
