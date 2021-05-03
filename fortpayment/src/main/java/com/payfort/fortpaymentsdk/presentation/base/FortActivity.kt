@@ -24,7 +24,7 @@ internal abstract class FortActivity : AppCompatActivity() {
         super.attachBaseContext(context)
 
     }
-    internal fun failedMessage(sdkResponse: SdkResponse) {
+    internal open fun failedMessage(sdkResponse: SdkResponse) {
         val intent = intent
         intent.putExtra(Constants.EXTRAS.SDK_RESPONSE, sdkResponse)
         this.setResult(RESULT_OK, intent)

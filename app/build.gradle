@@ -29,7 +29,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -42,28 +41,12 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson_version"
 
 
-    //Rx
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
-
-    //Retrofit
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.8.1'
-
-
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     api project(path: ':fortpayment')
-    implementation ('com.loopj.android:android-async-http:1.4.7') {
-        transitive = true
-    }
+
     implementation files ("libs/deviceprint-lib-release-2.3.2.aar")
 
 }

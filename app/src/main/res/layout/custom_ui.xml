@@ -157,17 +157,7 @@
 
 
 
-            <com.payfort.fortpaymentsdk.views.PayfortPayButton
-                android:id="@+id/btnOpenPayMenu"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="@dimen/pf_10dp_space"
-                android:background="@color/colorPrimaryDark"
-                android:gravity="center"
-                android:text="Half Screen Pay "
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/pf_20_txt_size" />
+
         </LinearLayout>
     </LinearLayout>
 

@@ -1,28 +1,26 @@
 package com.payfort.fortapisimulator.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.iovation.mobile.android.DevicePrint;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.payfort.fortapisimulator.CustomUISample;
 import com.payfort.fortapisimulator.R;
 import com.payfort.fortapisimulator.adapters.FortParamsAdapter;
-import com.payfort.fortapisimulator.application.SimulatorApp;
 import com.payfort.fortapisimulator.data.beans.PfFortReqRespParams;
 import com.payfort.fortapisimulator.data.constants.Constants;
 import com.payfort.fortpaymentsdk.FortSdk;
@@ -31,9 +29,7 @@ import com.payfort.fortpaymentsdk.callbacks.FortCallback;
 import com.payfort.fortpaymentsdk.callbacks.FortInterfaces;
 import com.payfort.fortpaymentsdk.domain.model.FortRequest;
 
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +40,7 @@ import java.util.TreeMap;
 import static com.iovation.mobile.android.DevicePrint.getBlackbox;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private TextView submitToTV = null;
     private Spinner languageSpinner = null;
@@ -53,12 +49,12 @@ public class MainActivity extends Activity {
     private Spinner installmentsSpinner = null;
 
     private EditText sdkTokenET = null;
+    private TextView etDeviceId;
 
     private CheckBox doViewResponsePageCB = null;
     private CheckBox doAddDeviceFingerprintCB = null;
     private CheckBox showLoadingCB = null;
     private CheckBox showFraudExtrasParamsCB = null;
-    private CheckBox customUI = null;
 
     private LinearLayout installmentsLL = null;
     private LinearLayout llAsList = null;
@@ -67,6 +63,9 @@ public class MainActivity extends Activity {
     private Context appContext = null;
 
     private Button submitButton = null;
+
+    private Button btnCustomScreen = null;
+    private Button btnHalfPay = null;
 
     private Gson gson = new Gson();
     private String[] staticFields = {"merchant_identifier", "language", "command",
@@ -79,47 +78,14 @@ public class MainActivity extends Activity {
 
     private FortCallBackManager fortCallback = null;
 
+    private Spinner environmentSpinner = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-        customUI = findViewById(R.id.customUI);
         DevicePrint.start(getApplicationContext());
-        mEnvironment = (Constants.ENVIRONMENTS_VALUES) getIntent().getExtras().get("environment");
-        initActivity();
-        staticParams.addAll(Arrays.asList(staticFields));
-        viewsListeners();
-
-
-        if (fortCallback == null)
-            fortCallback = FortCallback.Factory.create();
-
-    }
-
-
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mAdapter == null)
-            setupAdapter();
-        sdkTokenET.setText(getIntent().getExtras().getString("sdk_token"));
-        for (PfFortReqRespParams param : fortParams) {
-            param.setActive(true);
-        }
-
-        this.submitToTV.setText(mEnvironment.toString());
-        mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
-
-        if (fortCallback == null)
-            fortCallback = FortCallback.Factory.create();
-    }
-
-    private void initActivity() {
+        this.etDeviceId = findViewById(R.id.etDeviceId);
         this.submitToTV = (TextView) findViewById(R.id.environmentNameTV);
         this.languageSpinner = (Spinner) findViewById(R.id.languagesSpinner);
         this.commandSpinner = (Spinner) findViewById(R.id.commandsSpinner);
@@ -135,10 +101,56 @@ public class MainActivity extends Activity {
         this.submitButton = (Button) findViewById(R.id.callSdkBtn);
         this.showLoadingCB = (CheckBox) findViewById(R.id.showLoading);
         this.showFraudExtrasParamsCB = (CheckBox) findViewById(R.id.showFraudExtrasCB);
+        this.environmentSpinner = (Spinner) findViewById(R.id.environmentSpinner);
+        btnHalfPay = findViewById(R.id.btnHalfPay);
+        btnCustomScreen = findViewById(R.id.btnCustomScreen);
+
+        setupEnvironmentListener();
+        environmentSpinner.setSelection(0);
+        staticParams.addAll(Arrays.asList(staticFields));
+        viewsListeners();
+        if (fortCallback == null)
+            fortCallback = FortCallback.Factory.create();
+
+        if (mAdapter == null)
+            setupAdapter();
+
+        for (PfFortReqRespParams param : fortParams) {
+            param.setActive(true);
+        }
+
+        mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
+        etDeviceId.setText(FortSdk.getDeviceId(this));
     }
 
+
+    private void setupEnvironmentListener() {
+        environmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        //Sandbox
+                        mEnvironment = Constants.ENVIRONMENTS_VALUES.SANDBOX2;
+                        break;
+                    case 1:
+                        //production
+                        mEnvironment = Constants.ENVIRONMENTS_VALUES.PRODUCTION;
+                        break;
+                }
+                submitToTV.setText(mEnvironment.toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+
     private void setupAdapter() {
-        this.mAdapter = new FortParamsAdapter(mContext, R.layout.params_lv_row, fortParams, mEnvironment,
+        this.mAdapter = new FortParamsAdapter(mContext,
+                R.layout.params_lv_row, fortParams, mEnvironment,
                 FortSdk.getDeviceId(MainActivity.this));
         mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
     }
@@ -147,14 +159,8 @@ public class MainActivity extends Activity {
         commandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String[] commands = getResources().getStringArray(R.array.command_value);
-                //  if (commands.length != 0)
-                // getParams(commands[position]);
-
                 fortParams.clear();
-
                 addOtherStaticParams();
-
                 mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
             }
 
@@ -163,96 +169,103 @@ public class MainActivity extends Activity {
             }
         });
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submitButton.setOnClickListener(v -> callSDK());
 
-                callSDK();
+        showFraudExtrasParamsCB.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                addFraudExtrasParams();
+            } else {
+                fortParams.clear();
+                addOtherStaticParams();
+                mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
             }
         });
 
-        showFraudExtrasParamsCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    addFraudExtrasParams();
-                } else {
-                    fortParams.clear();
+        btnCustomScreen.setOnClickListener(v -> moveToCustomScreen());
 
-                    addOtherStaticParams();
-
-                    mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
-                }
-            }
+        btnHalfPay.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("env", mEnvironment.getSdkEnvironemt());
+            bundle.putSerializable("fortRequest", getFortRequest());
+            CustomUiDialog.newInstance(bundle).show(getSupportFragmentManager(), "TAG");
         });
+
+    }
+
+    private void moveToCustomScreen() {
+        Intent intent = new Intent(MainActivity.this, CustomUISample.class);
+        intent.putExtra("fortRequest", getFortRequest());
+        intent.putExtra("env", mEnvironment.getSdkEnvironemt());
+        startActivity(intent);
     }
 
 
     private void callSDK() {
         try {
             //collect request
-            FortRequest fortRequest = new FortRequest();
-            fortRequest.setShowResponsePage(doViewResponsePageCB.isChecked());
-            Map<String, Object> map = new TreeMap<String, Object>();
-            map.put("language", String.valueOf(languageSpinner.getSelectedItem()));
-            map.put("sdk_token", sdkTokenET.getText().toString());
-            String command = String.valueOf(commandSpinner.getSelectedItem());
-            map.put("command", command.equals("NULL") ? null : command);
-            for (int i = 0; i < mAdapter.getCount(); i++) {
-                if (!mAdapter.paramsValues.get(i).isEmpty())
-                    map.put(fortParams.get(i).getParamName(), mAdapter.paramsValues.get(i));
-            }
-
-            String paymentOption = String.valueOf(paymentOptionSpinner.getSelectedItem());
-            String installments = String.valueOf(installmentsSpinner.getSelectedItem());
-            if (paymentOption != null && !paymentOption.isEmpty()) {
-                map.put("payment_option", paymentOption);
-            }
-            if (installments != null && !installments.isEmpty()) {
-                map.put("installments", installments);
-            }
-            if (doAddDeviceFingerprintCB.isChecked()) {
-                String fingerprintValue = getBlackbox(getApplicationContext());
-                map.put("device_fingerprint", fingerprintValue);
-            }
-
-            fortRequest.setRequestMap(map);
+            FortRequest fortRequest = getFortRequest();
 
             boolean showLoading = showLoadingCB.isChecked();
-            if (customUI.isChecked()) {
-                Intent intent = new Intent(this, CustomUISample.class);
-                intent.putExtra("fortRequest", fortRequest);
-                intent.putExtra("env", mEnvironment.getSdkEnvironemt());
-                startActivity(intent);
-                
-            } else
-                FortSdk.getInstance().
-                        registerCallback(this, fortRequest, mEnvironment.getSdkEnvironemt(), 5, fortCallback, showLoading, new FortInterfaces.OnTnxProcessed() {
-                            @Override
-                            public void onCancel(Map<String, Object> requestParamsMap, Map<String, Object> responseMap) {
-                                System.out.println("onCancel==REQ=>> " + responseMap.toString());
-                                openResponsePage(gson.toJson(responseMap));
-                            }
+            FortSdk.getInstance().registerCallback(this, fortRequest, mEnvironment.getSdkEnvironemt(), 5, fortCallback, showLoading, new FortInterfaces.OnTnxProcessed() {
+                @Override
+                public void onCancel(Map<String, Object> requestParamsMap, Map<String, Object> responseMap) {
+                    System.out.println("onCancel==REQ=>> " + responseMap.toString());
+                    if (responseMap.size() > 0)
+                        openResponsePage(gson.toJson(responseMap));
+                }
 
-                            @Override
-                            public void onSuccess(Map<String, Object> requestParamsMap, Map<String, Object> fortResponseMap) {
-                                System.out.println("onSuccess==REQ=>> " + requestParamsMap.toString());
-                                openResponsePage(gson.toJson(fortResponseMap));
-                            }
+                @Override
+                public void onSuccess(Map<String, Object> requestParamsMap, Map<String, Object> fortResponseMap) {
+                    System.out.println("onSuccess==REQ=>> " + requestParamsMap.toString());
+                    if (fortResponseMap.size() > 0)
+                        openResponsePage(gson.toJson(fortResponseMap));
+                }
 
                             @Override
                             public void onFailure(Map<String, Object> requestParamsMap, Map<String, Object> fortResponseMap) {
                                 System.out.println("onFailure==REQ=>> " + requestParamsMap.toString());
-                                openResponsePage(gson.toJson(fortResponseMap));
+                                if (fortResponseMap.size() > 0)
+                                    openResponsePage(gson.toJson(fortResponseMap));
                             }
-                        });
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @NotNull
+    private FortRequest getFortRequest() {
+        FortRequest fortRequest = new FortRequest();
+        fortRequest.setShowResponsePage(doViewResponsePageCB.isChecked());
+        Map<String, Object> map = new TreeMap<String, Object>();
+        map.put("language", String.valueOf(languageSpinner.getSelectedItem()));
+        map.put("sdk_token", sdkTokenET.getText().toString());
+        String command = String.valueOf(commandSpinner.getSelectedItem());
+        map.put("command", command.equals("NULL") ? null : command);
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            if (!mAdapter.paramsValues.get(i).isEmpty())
+                map.put(fortParams.get(i).getParamName(), mAdapter.paramsValues.get(i));
+        }
+
+        String paymentOption = String.valueOf(paymentOptionSpinner.getSelectedItem());
+        String installments = String.valueOf(installmentsSpinner.getSelectedItem());
+        if (paymentOption != null && !paymentOption.isEmpty()) {
+            map.put("payment_option", paymentOption);
+        }
+        if (installments != null && !installments.isEmpty()) {
+            map.put("installments", installments);
+        }
+        if (doAddDeviceFingerprintCB.isChecked()) {
+            String fingerprintValue = getBlackbox(getApplicationContext());
+            map.put("device_fingerprint", fingerprintValue);
+        }
+
+        fortRequest.setRequestMap(map);
+        return fortRequest;
+    }
+
     private void openResponsePage(String responseString) {
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent openResponseActivityIntent = new Intent(MainActivity.this, ResponseActivity.class);
             openResponseActivityIntent.putExtra("responseString", responseString);
             startActivity(openResponseActivityIntent);
@@ -267,54 +280,10 @@ public class MainActivity extends Activity {
     }
 
 
-    private void getParams(String command) {
-        if (command.equals("PURCHASE")) {
-            installmentsLL.setVisibility(View.VISIBLE);
-        } else {
-            installmentsLL.setVisibility(View.GONE);
-        }
-        RequestParams params = new RequestParams();
-        params.put("command", command);
-
-        SimulatorApp.getHttpClient().post(mEnvironment.getParamsUrl(), params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    JSONArray array = response.getJSONArray("list");
-                    fortParams.clear();
-                    for (int n = 0; n < array.length(); n++) {
-                        PfFortReqRespParams ob = gson.fromJson(array.getJSONObject(n).toString(), PfFortReqRespParams.class);
-                        if (!staticParams.contains(ob.getParamName())) {
-                            ob.setActive(true);
-                            fortParams.add(ob);
-                        }
-                    }
-
-                    addOtherStaticParams();
-
-                    mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        });
-    }
 
     private void addOtherStaticParams() {
 
-        String[] main = {"device_id ", "amount", "currency", "customer_email", "customer_name",
+        String[] main = {"amount", "currency", "customer_email", "customer_name",
                 "token_name", "check_fraud", "customer_ip", "cart_details", "check_3ds", "merchant_reference", "eci", "order_description", "card_number", "expiry_date", "card_security_code", "remember_me", "customer_type", "customer_first_name",
                 "customer_middle_initial", "customer_address1", "customer_phone", "ship_type", "ship_first_name", "ship_last_name", "ship_method", "merchant_extra", "merchant_extra1", "merchant_extra2", "merchant_extra3", "settlement_reference"
                 , "phone_number", "merchant_extra4", "dynamic_descriptor", "flex_value"};
@@ -347,4 +316,6 @@ public class MainActivity extends Activity {
 
         mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
     }
+
+
 }

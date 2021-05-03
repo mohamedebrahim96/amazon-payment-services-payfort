@@ -14,32 +14,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:name">
-        <activity android:name=".activities.CustomUiJava"></activity>
         <activity android:name=".CustomUISample">
 
-            <!--
-                <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
+
         <activity
-            android:name=".activities.GenerateTokenActivity"
+            android:name=".activities.MainActivity"
             android:configChanges="locale"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.MainActivity"
-            android:configChanges="locale"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ResponseActivity"
             android:configChanges="locale"

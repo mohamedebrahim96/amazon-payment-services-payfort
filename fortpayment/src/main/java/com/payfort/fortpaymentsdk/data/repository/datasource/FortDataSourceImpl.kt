@@ -7,6 +7,8 @@ import com.payfort.fortpaymentsdk.security.DataSecurityService
 import com.payfort.fortpaymentsdk.security.aes.AESCipherManager
 import com.payfort.fortpaymentsdk.utils.MapUtils
 import io.reactivex.Observable
+import org.json.JSONException
+import org.json.JSONObject
 import java.security.interfaces.RSAPublicKey
 import javax.crypto.spec.SecretKeySpec
 
@@ -38,12 +40,15 @@ class FortDataSourceImpl constructor(private val fortEndpoint: FortEndpoint) : F
             rsaPublicKey = DataSecurityService.getPublicKey(peerCertificates)
             fortEndpoint.validateData(getEncryptedData(rsaPublicKey, request, secretKeySpec))
         }.map {
-            val decryptMsg = aesCipherManager.decryptMsg(it, secretKeySpec)
-            MapUtils.collectResponse(gson, decryptMsg, request.requestMap)
+
+            handleResponse(it, request, secretKeySpec)
+
         }
 
 
     }
+
+
     /**
      * first the api should gain Public key from server then it's
      * responsible for validate Card Number
@@ -113,9 +118,7 @@ class FortDataSourceImpl constructor(private val fortEndpoint: FortEndpoint) : F
             }
         } else fortEndpoint.logData(getEncryptedData(rsaPublicKey, request, secretKeySpec))
             .map {
-                val decryptMsg = aesCipherManager.decryptMsg(it, secretKeySpec)
-                var collectResponse = MapUtils.collectResponse(gson, decryptMsg, request.requestMap)
-                collectResponse
+                handleResponse(it, request, secretKeySpec)
 
             }
     }
@@ -128,16 +131,32 @@ class FortDataSourceImpl constructor(private val fortEndpoint: FortEndpoint) : F
      * @return String
      */
     private fun getEncryptedData(
-        publicKey: RSAPublicKey?,
-        body: SdkRequest,
-        secretKeySpec: SecretKeySpec?
+            publicKey: RSAPublicKey?,
+            body: SdkRequest,
+            secretKeySpec: SecretKeySpec?
     ): String {
         return DataSecurityService.encryptRequestData(
-            gson.toJson(body, SdkRequest::class.java),
-            publicKey,
-            secretKeySpec
+                gson.toJson(body, SdkRequest::class.java),
+                publicKey,
+                secretKeySpec
         )
     }
+
+    /**
+     *
+     * @param it String
+     * @param request SdkRequest
+     * @param secretKeySpec SecretKeySpec?
+     * @return (com.payfort.fortpaymentsdk.domain.model.SdkResponse..com.payfort.fortpaymentsdk.domain.model.SdkResponse?)
+     */
+    private fun handleResponse(it: String, request: SdkRequest, secretKeySpec: SecretKeySpec?) =
+            try {
+                JSONObject(it)
+                MapUtils.getTechnicalProblemResponse(null, request.requestMap)
+            } catch (e: JSONException) {
+                val decryptMsg = aesCipherManager.decryptMsg(it, secretKeySpec)
+                MapUtils.collectResponse(gson, decryptMsg, request.requestMap)
+            }
 
 
 }

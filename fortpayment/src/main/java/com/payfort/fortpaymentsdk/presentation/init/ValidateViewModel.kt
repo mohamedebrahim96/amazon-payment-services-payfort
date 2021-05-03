@@ -25,9 +25,11 @@ internal class ValidateViewModel(private val validateDataUseCase: UseCase<SdkReq
         val sdkRequest = CreatorHandler.createSdkRequest(context, fortRequest)
 
         validateDataUseCase.execute(sdkRequest).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                _result.value = it
-            }
+            .observeOn(AndroidSchedulers.mainThread()).subscribe ({
+                    _result.value = it
+                },{
+                    _result.value = Result.Failure(it)
+                })
     }
 
 

@@ -18,19 +18,8 @@
     <string name="submit_as_key">Submit to</string>
 
 
-    <string-array name="submit_to_value">
-        <item>http://bkend1.pfdev.com:8080/FortMobileAPI/whatever</item>
-        <item>https://checkout.fortstg.com/FortMobileAPI/whatever</item>
-        <item>https://sbcheckout.payfort.com/FortMobileAPI/whatever</item>
-    </string-array>
-    <string name="merchant_identifier_value">mid1</string>
-    <string name="access_code_value">accessCode1</string>
-    <string name="Signature_passphrase_value">omMas300dREQ</string>
-    <string-array name="sha_type_value">
-        <item>SHA-128</item>
-        <item>SHA-256</item>
-        <item>SHA-512</item>
-    </string-array>
+
+
     <string-array name="language_value">
         <item>en</item>
         <item>ar</item>
@@ -54,6 +43,7 @@
     <string name="submit_as_value">MOBILE API</string>
 
     <string name="submit_btn_hint">submit AR</string>
+    <string name="btn_normalPay">Normal Pay</string>
 
 
 </resources>

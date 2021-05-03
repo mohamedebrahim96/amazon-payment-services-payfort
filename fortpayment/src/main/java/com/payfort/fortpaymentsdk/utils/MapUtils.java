@@ -1,8 +1,12 @@
 package com.payfort.fortpaymentsdk.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.payfort.fortpaymentsdk.constants.Constants;
 import com.payfort.fortpaymentsdk.domain.model.SdkResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -70,6 +74,7 @@ public class MapUtils {
         if (isEmpty(serverResponse)) {
             return getTechnicalProblemResponse(null, merchantRequestMap);
         }
+
 
         SdkResponse sdkResponse = gson.fromJson(serverResponse, SdkResponse.class);
         return sdkResponse;

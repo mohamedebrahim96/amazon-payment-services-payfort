@@ -13,7 +13,6 @@ import com.payfort.fortpaymentsdk.utils.gone
 import com.payfort.fortpaymentsdk.utils.visible
 import com.payfort.fortpaymentsdk.views.model.PayComponents
 import kotlinx.android.synthetic.main.custom_ui.*
-import java.util.*
 
 class CustomUISample : AppCompatActivity(), PayFortCallback {
     var gson = Gson()
@@ -25,7 +24,6 @@ class CustomUISample : AppCompatActivity(), PayFortCallback {
         supportActionBar?.hide()
 
 
-        //
 
         val payComponents = PayComponents(etCardNumberView, cvvView = etCardCvv, etCardExpiry, holderNameView = cardHolderNameView)
 
@@ -34,24 +32,6 @@ class CustomUISample : AppCompatActivity(), PayFortCallback {
         rememberMeTB.setOnCheckedChangeListener { _, isChecked ->
             btnPay.isRememberMeEnabled(isChecked)
         }
-        btnOpenPayMenu.setOnClickListener {
-            supportFragmentManager.let {
-                val bundle = Bundle()
-                bundle.putString("env", environment)
-                bundle.putSerializable("fortRequest", fortRequest)
-                CustomUiDialog.newInstance(bundle).apply {
-                    show(it, tag)
-                }
-            }
-        }
-
-
-
-
-
-
-
-
 
 
     }

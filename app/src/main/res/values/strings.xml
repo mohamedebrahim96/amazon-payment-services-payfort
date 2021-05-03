@@ -15,41 +15,20 @@
     <string name="payment_option_key">payment_option</string>
     <string name="eci_key">eci</string>
     <string name="submit_as_key">Submit to</string>
-    <string name="device_id_key">device_id</string>
-    <string name="service_command_key">service_command</string>
-    <string name="environment_key">environment</string>
+    <string name="device_id_key">Device_id</string>
+    <string name="service_command_key">Service_command</string>
+    <string name="environment_key">Environment</string>
     <string name="service_command_value">SDK_TOKEN</string>
     <string name="next_btn">Next</string>
 
-    <string-array name="submit_to_value">
-        <item>http://bkend1.pfdev.com:8080/FortMobileAPI/whatever</item>
-        <item>https://checkout.fortstg.com/FortMobileAPI/whatever</item>
-        <item>https://sbcheckout.payfort.com/FortMobileAPI/whatever</item>
-    </string-array>
-    <string name="merchant_identifier_value">mid1</string>
-    <string name="access_code_value">accessCode1</string>
-    <string name="Signature_passphrase_value">omMas300dREQ</string>
-    <string-array name="sha_type_value">
-        <item>SHA-128</item>
-        <item>SHA-256</item>
-        <item>SHA-512</item>
-    </string-array>
+
     <string-array name="language_value">
         <item>en</item>
         <item>ar</item>
-        <item>fr</item>
-        <item>AR</item>
-        <item>EN</item>
-        <item> </item>
-        <item>ar$</item>
     </string-array>
     <string-array name="command_value">
         <item>AUTHORIZATION</item>
         <item>PURCHASE</item>
-        <item>authorization</item>
-        <item>Auth</item>
-        <item> </item>
-        <item>NULL</item>
     </string-array>
     <string-array name="payment_option_value">
         <item></item>
@@ -65,16 +44,12 @@
         <item>NO</item>
     </string-array>
     <string-array name="environment_value">
-        <item>STG</item>
         <item>SANDBOX</item>
-        <item>SANDBOX-2</item>
         <item>PRODUCTION</item>
-        <item>DEV</item>
-        <item>CYBERSOURCE</item>
-        <item>STG_NPS</item>
     </string-array>
     <string name="submit_as_value">MOBILE API</string>
 
     <string name="submit_btn_hint">Submit</string>
+    <string name="btn_normalPay">Normal Pay</string>
 
 </resources>

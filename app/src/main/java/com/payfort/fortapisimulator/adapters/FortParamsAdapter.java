@@ -19,9 +19,7 @@ import com.payfort.fortapisimulator.data.constants.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by gbarham on 12/1/2015.
- */
+
 public class FortParamsAdapter extends ArrayAdapter<PfFortReqRespParams> {
     private Context mContext = null;
     private ArrayList<PfFortReqRespParams> dataSource = null;
@@ -86,18 +84,16 @@ public class FortParamsAdapter extends ArrayAdapter<PfFortReqRespParams> {
                     holder.valueET.setText("10");
                 }
                 if (object.getParamName().equals("access_code")) {
-                    holder.valueET.setText(environment.getAccessCode());
+                    holder.valueET.setText(holder.valueET.getText().toString());
                 } else if (object.getParamName().equals("merchant_identifier")) {
-                    holder.valueET.setText(environment.getMerchantIdentifier());
+                    holder.valueET.setText(holder.valueET.getText().toString());
                 } else if (object.getParamName().equals("merchant_reference")) {
                     Long tsLong = System.currentTimeMillis() / 1000;
                     String ts = tsLong.toString();
                     holder.valueET.setText(ts);
                 } else if (object.getParamName().equals("customer_email")) {
                     holder.valueET.setText("test@payfort.com");
-                } else if (object.getParamName().equals("cart_details")) {
-                   // holder.valueET.setText("{\"cart_items\":[{\"item_quantity\":\"45\"},{\"item_quantity\":\"45\",\"item_sku\":\"12\"}]}");
-                } else if(object.getParamName().equals("device_id")) {
+                }  else if(object.getParamName().equals("device_id")) {
                     holder.valueET.setText(deviceId);
                 }else{
                     holder.valueET.setText("");

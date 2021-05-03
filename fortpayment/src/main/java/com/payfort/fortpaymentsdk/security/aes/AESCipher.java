@@ -117,7 +117,8 @@ public class AESCipher {
 			byte[] encryptedTextBytes =  Base64.decode(message.getBytes("utf-8"));
 			return new String(cipher.doFinal(encryptedTextBytes));
 		} catch (Exception e) {
-			throw Throwables.propagate(e);
+			return message;
+			//throw Throwables.propagate(e);
 		}
 	}
 
