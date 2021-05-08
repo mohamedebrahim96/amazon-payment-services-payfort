@@ -79,25 +79,7 @@ public class FortParamsAdapter extends ArrayAdapter<PfFortReqRespParams> {
             holder.mWatcher.setPosition(position);
             holder.mWatcher.setActive(true);
 
-            if (holder.valueET.getText().toString().isEmpty())
-                if (object.getParamName().equals("amount")) {
-                    holder.valueET.setText("10");
-                }
-                if (object.getParamName().equals("access_code")) {
-                    holder.valueET.setText(holder.valueET.getText().toString());
-                } else if (object.getParamName().equals("merchant_identifier")) {
-                    holder.valueET.setText(holder.valueET.getText().toString());
-                } else if (object.getParamName().equals("merchant_reference")) {
-                    Long tsLong = System.currentTimeMillis() / 1000;
-                    String ts = tsLong.toString();
-                    holder.valueET.setText(ts);
-                } else if (object.getParamName().equals("customer_email")) {
-                    holder.valueET.setText("test@payfort.com");
-                }  else if(object.getParamName().equals("device_id")) {
-                    holder.valueET.setText(deviceId);
-                }else{
-                    holder.valueET.setText("");
-                }
+
         }
         return convertView;
     }

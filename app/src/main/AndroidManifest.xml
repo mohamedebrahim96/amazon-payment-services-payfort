@@ -21,7 +21,9 @@
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="locale"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/app_name"
+
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

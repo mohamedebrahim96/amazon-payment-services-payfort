@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         //Sandbox
-                        mEnvironment = Constants.ENVIRONMENTS_VALUES.SANDBOX2;
+                        mEnvironment = Constants.ENVIRONMENTS_VALUES.SANDBOX;
                         break;
                     case 1:
                         //production

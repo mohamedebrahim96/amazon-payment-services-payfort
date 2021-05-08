@@ -11,18 +11,18 @@
     android:focusableInTouchMode="true">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +67,9 @@
 
                 </RelativeLayout>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -199,6 +201,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -394,35 +397,33 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnHalfPay"
+            android:layout_width="@dimen/_130sdp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Button
-                android:id="@+id/btnHalfPay"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:backgroundTint="@color/pf_green_dark"
-                android:text="Bottom Sheet "
-                android:textColor="@color/colorWhite" />
+            android:layout_margin="@dimen/_10sdp"
+            android:backgroundTint="@color/pf_green_dark"
+            android:text="custom-half view "
+            android:textColor="@color/colorWhite" />
 
 
-            <Button
-                android:id="@+id/btnCustomScreen"
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:backgroundTint="@color/pf_green_dark"
-                android:text="Custom Screen"
-                android:textColor="@color/colorWhite" />
+        <Button
+            android:id="@+id/btnCustomScreen"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:backgroundTint="@color/pf_green_dark"
+            android:text="Custom Screen"
+            android:textColor="@color/colorWhite" />
 
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>
