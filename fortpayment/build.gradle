@@ -11,13 +11,13 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 30
-        buildConfigField 'int', 'VERSION_CODE', "3"
-        buildConfigField 'String', 'VERSION_NAME', "\"2.0.2\""
+        buildConfigField 'int', 'VERSION_CODE', "4"
+        buildConfigField 'String', 'VERSION_NAME', "\"2.0.3\""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
         multiDexEnabled true
         versionCode 1
-        versionName "2.0.2"
+        versionName "2.0.3"
     }
     testOptions {
         unitTests.includeAndroidResources = true
