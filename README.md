@@ -13,3 +13,8 @@ Fully secure. Your customers enjoy the same, trusted Amazon Payment Services exp
 Fully customized. The Amazon Payment Services mobile SDK is fully customizable, giving your customers a native experience on both Android and iOS devices.
 
 
+<img src="/wiki/screenshot.png" align="right" width="32%"/>
+
+## Tech stack & Open-source libraries
+- Minimum SDK level 21
+- [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) for asynchronous.
