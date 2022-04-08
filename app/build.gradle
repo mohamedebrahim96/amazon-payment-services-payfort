@@ -3,11 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    configurations.all {
+        resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.payfort.fortapisimulator"
+        applicationId "com.payfort.forttestapp"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -45,8 +48,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    api project(path: ':fortpayment')
-
-    implementation files ("libs/deviceprint-lib-release-2.3.2.aar")
+    implementation('com.amazon:fortpayment:+:release@aar') {
+        transitive = true
+    }
+    implementation files("libs/deviceprint-lib-release-2.3.2.aar")
 
 }

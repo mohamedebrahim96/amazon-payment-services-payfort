@@ -1,10 +1,13 @@
 package com.payfort.fortapisimulator.activities;
 
+import static com.iovation.mobile.android.DevicePrint.getBlackbox;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -31,17 +34,19 @@ import com.payfort.fortpaymentsdk.domain.model.FortRequest;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
-
-import static com.iovation.mobile.android.DevicePrint.getBlackbox;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getName();
     private TextView submitToTV = null;
     private Spinner languageSpinner = null;
     private Spinner commandSpinner = null;
@@ -153,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.params_lv_row, fortParams, mEnvironment,
                 FortSdk.getDeviceId(MainActivity.this));
         mAdapter.notifyDataSetChanged(llAsList, fortParams, mEnvironment);
+        Log.e("TEST", FortSdk.getDeviceId(MainActivity.this));
     }
 
     private void viewsListeners() {
@@ -187,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("env", mEnvironment.getSdkEnvironemt());
             bundle.putSerializable("fortRequest", getFortRequest());
-            CustomUiDialog.newInstance(bundle).show(getSupportFragmentManager(), "TAG");
+            CustomUiDialog.newInstance(bundle).show(getSupportFragmentManager(), TAG);
         });
 
     }
@@ -209,24 +215,25 @@ public class MainActivity extends AppCompatActivity {
             FortSdk.getInstance().registerCallback(this, fortRequest, mEnvironment.getSdkEnvironemt(), 5, fortCallback, showLoading, new FortInterfaces.OnTnxProcessed() {
                 @Override
                 public void onCancel(Map<String, Object> requestParamsMap, Map<String, Object> responseMap) {
-                    System.out.println("onCancel==REQ=>> " + responseMap.toString());
+                    System.out.println("Fort-onCancel==REQ=>> " + responseMap.toString());
                     if (responseMap.size() > 0)
                         openResponsePage(gson.toJson(responseMap));
                 }
 
                 @Override
                 public void onSuccess(Map<String, Object> requestParamsMap, Map<String, Object> fortResponseMap) {
-                    System.out.println("onSuccess==REQ=>> " + requestParamsMap.toString());
+                    System.out.println("Fort-onSuccess==REQ=>> " + requestParamsMap.toString());
                     if (fortResponseMap.size() > 0)
                         openResponsePage(gson.toJson(fortResponseMap));
                 }
 
-                            @Override
-                            public void onFailure(Map<String, Object> requestParamsMap, Map<String, Object> fortResponseMap) {
-                                System.out.println("onFailure==REQ=>> " + requestParamsMap.toString());
-                                if (fortResponseMap.size() > 0)
-                                    openResponsePage(gson.toJson(fortResponseMap));
-                            }
+                @Override
+                public void onFailure(Map<String, Object> requestParamsMap, Map<String, Object> fortResponseMap) {
+                    System.out.println("Fort-onFailure==REQ=>> " + requestParamsMap.toString());
+                    System.out.println("Fort-onFailure==REQ=>> " + fortResponseMap.toString());
+                    if (fortResponseMap.size() > 0)
+                        openResponsePage(gson.toJson(fortResponseMap));
+                }
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,9 +246,13 @@ public class MainActivity extends AppCompatActivity {
         fortRequest.setShowResponsePage(doViewResponsePageCB.isChecked());
         Map<String, Object> map = new TreeMap<String, Object>();
         map.put("language", String.valueOf(languageSpinner.getSelectedItem()));
-        map.put("sdk_token", sdkTokenET.getText().toString());
+        map.put("sdk_token", "ff2703c2a84c433dba5ff1d0a733a920");
+        map.put("merchant_reference", System.currentTimeMillis());
+        map.put("currency", "AED");
+        map.put("amount", 2400);
+        map.put("customer_email", "mohamed.ebrahim@shopiniworld.com");
         String command = String.valueOf(commandSpinner.getSelectedItem());
-        map.put("command", command.equals("NULL") ? null : command);
+        map.put("command", "PURCHASE");
         for (int i = 0; i < mAdapter.getCount(); i++) {
             if (!mAdapter.paramsValues.get(i).isEmpty())
                 map.put(fortParams.get(i).getParamName(), mAdapter.paramsValues.get(i));
@@ -278,7 +289,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         fortCallback.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
     private void addOtherStaticParams() {

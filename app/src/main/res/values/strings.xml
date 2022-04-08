@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FortApiSimulator</string>
+    <string name="app_name">Fort Test</string>
     <string name="action_settings">Settings</string>
     <string name="Simulator_hint">Simulator</string>
 
